@@ -54,5 +54,11 @@ public class GreetingServiceController {
     public GreetingEntity updateGreeting(@PathVariable Long id, @RequestBody GreetingEntity greeting) {
         return greetingService.updateGreeting(id, greeting.getMessage());
     }
+    // Delete Greeting Message
+    @DeleteMapping("/delete/{id}")
+    public String deleteGreeting(@PathVariable Long id) {
+        boolean deleted = greetingService.deleteGreeting(id);
+        return deleted ? "Greeting deleted successfully" : "Greeting not found!";
+    }
 
 }
