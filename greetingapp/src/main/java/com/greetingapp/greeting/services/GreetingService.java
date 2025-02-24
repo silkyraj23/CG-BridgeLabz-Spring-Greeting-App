@@ -47,4 +47,15 @@ public class GreetingService {
     public List<GreetingEntity> getAllGreetings() {
         return greetingRepository.findAll();
     }
+
+    // Update Greeting Message
+    public GreetingEntity updateGreeting(Long id, String message) {
+        Optional<GreetingEntity> existingGreeting = greetingRepository.findById(id);
+        if (existingGreeting.isPresent()) {
+            GreetingEntity greeting = existingGreeting.get();
+            greeting.setMessage(message);
+            return greetingRepository.save(greeting);
+        }
+        return null;
+    }
 }
