@@ -1,9 +1,16 @@
 package com.greetingapp.greeting.services;
 
+import com.greetingapp.greeting.entities.GreetingEntity;
+import com.greetingapp.greeting.repositories.GreetingRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class GreetingService {
+    private final GreetingRepository greetingRepository;
+    // Constructor-based Dependency Injection
+    public GreetingService(GreetingRepository greetingRepository) {
+        this.greetingRepository = greetingRepository;
+    }
 
     public String getGreetingMessage()
     {
@@ -20,5 +27,13 @@ public class GreetingService {
         }else {
             return "Hello World";
         }
+    }
+    // Save Greeting Message
+    public GreetingEntity saveGreeting(String message) {
+
+        GreetingEntity greeting = new GreetingEntity(message);
+
+        return greetingRepository.save(greeting);
+
     }
 }
